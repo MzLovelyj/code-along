@@ -1,16 +1,21 @@
 <p> Welcome to <%= title %>. </p>
-
+<!--Lines 4-6: An if statement displays a special
+message for logged in users.-->
 <% if (isUserLoggedIn) { %>
   <p> Hello,  <%= currentUserInfo.name %>. </p>
 <% } %>
 
 <nav>
+  <!--Lines 10-17: An if..else statement displays some of the links to logged in
+   users and others to anonymous users.-->
   <ul>
-    <% if (!isUserLoggedIn) 
+    <% if (!isUserLoggedIn) { %>
     <li> <a href="/signup"> Sign Up </a> </li>
     <li> <a href="/login"> Log In </a> </li>
+    <% } else { %>
     <li> <a href="/launderers"> Find a Launderer </a> </li>
     <li> <a href="/dashboard"> See Dashboard </a> </li>
     <li> <a href="/logout"> Log Out </a> </li>
+    <% } %>
   </ul>
 </nav>

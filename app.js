@@ -9,7 +9,6 @@ const mongoose  = require('mongoose');
 const session   = require('express-session');
 const MongoStore  = require('connect-mongo')(session);
 
-
 // connecting to the DB
 mongoose.connect('mongodb://localhost/uberlaundry');
 
@@ -30,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.uss(session({
+app.use(session({
   ///Should always be custom!
   secret: 'never do your own Laundry again!',
   resave: true,
@@ -65,6 +64,11 @@ app.use('/users', users);
 const authRoutes = require('./routes/auth');
 console.log('auth Routes');
 app.use('/', authRoutes);
+
+const laundryRoutes = require('./routes/laundry');
+console.log('laundryRoutes');
+app.use('/laundryRoutes');
+
 
 // -----------------------------------------------------------
 // catch 404 and forward to error handler

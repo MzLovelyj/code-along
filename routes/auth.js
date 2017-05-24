@@ -1,5 +1,5 @@
 // This route is related to user registration and authentication
-// SignUp & LogIn
+// SignUp, LogIn & LogOut
 const express = require('express');
 
 const router = express.Router();
@@ -124,5 +124,24 @@ router.post('/login', (req, res, next) => {
   });
 });
 
+// -------------------LogOut------------------------
+router.get('/logout', (req, res, next) => {
+  if (!req.session.currentUser) {
+    res.redirect('/');
+    return;
+  }
+
+// Line 106: Call the req.session.destroy()
+// to clear the session for log out.
+  req.session.destroy((err) => {
+    if (err) {
+      next(err);
+      return;
+    }
+
+// Line 143: Redirect to the home page when it’s done.
+    res.redirect('/');
+  });
+});
 
 module.exports = router;
