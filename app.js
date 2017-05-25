@@ -30,12 +30,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  ///Should always be custom!
-  secret: 'never do your own Laundry again!',
+  secret: 'never do your own laundry again',
   resave: true,
   saveUninitialized: true,
-  cookie: {maxAge: 6000},
-  strore: new MongoStore({
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
   })
@@ -67,7 +66,7 @@ app.use('/', authRoutes);
 
 const laundryRoutes = require('./routes/laundry');
 console.log('laundryRoutes');
-app.use('/laundryRoutes');
+app.use('/', laundryRoutes);
 
 
 // -----------------------------------------------------------
